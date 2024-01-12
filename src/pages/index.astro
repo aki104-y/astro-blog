@@ -1,18 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Greeting from '../components/Greeting.jsx';
-const pageTitle = "Home Page";
-//microCMS呼び出し
-import { getBlogs } from "../library/microcms";
-const response = await getBlogs({ fields: ["id", "title"] });
+import CardPosts from '../components/CardPosts.astro';
 ---
-<BaseLayout pageTitle={pageTitle}>
-  <h2>私の素晴らしいブログのサブタイトル</h2>
-  {
-    response.contents.map((content: any) => (
-      <li>
-        <a href={content.id}>{content.title}</a>
-      </li>
-    ))
-  }
+<BaseLayout>
+  <h2>主にweb制作・開発のブログ</h2>
+  <CardPosts />
 </BaseLayout>

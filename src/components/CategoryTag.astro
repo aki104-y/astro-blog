@@ -1,0 +1,16 @@
+---
+//microCMS呼び出し
+import { getBlogs, getCategories } from "../library/microcms";
+const response = await getBlogs({ fields: "id,title,createdAt,updatedAt,category" });
+
+// microCMSからカテゴリデータを取得
+const categories = await getCategories();
+---
+
+{
+  response.contents.map((content: any) => (
+    content.category && content.category.map((category: any) => ( // カテゴリを表示
+      <li class="card-posts__tag">{category.name}</li>
+    ))
+  ))
+}

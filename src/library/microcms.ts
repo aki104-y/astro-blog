@@ -1,8 +1,15 @@
-import { createClient, MicroCMSQueries } from "microcms-js-sdk";
+import pkg from 'microcms-js-sdk';
+const { createClient } = pkg;
+
+import type {
+  MicroCMSQueries,
+} from 'microcms-js-sdk';
+
 const client = createClient({
   serviceDomain: import.meta.env.MICROCMS_SERVICE_DOMAIN,
   apiKey: import.meta.env.MICROCMS_API_KEY,
 });
+
 
 export type Blog = {
   id: string;
@@ -17,7 +24,18 @@ export type Blog = {
     height: number;
     width: number;
   };
+  category: Category[] | null;
 };
+
+export type Category = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  revisedAt: string;
+  name: string;
+};
+
 export type BlogResponse = {
   totalCount: number;
   offset: number;
@@ -28,6 +46,7 @@ export type BlogResponse = {
 export const getBlogs = async (queries?: MicroCMSQueries) => {
   return await client.get<BlogResponse>({ endpoint: "blogs", queries });
 };
+
 export const getBlogDetail = async (
   contentId: string,
   queries?: MicroCMSQueries
@@ -38,3 +57,9 @@ export const getBlogDetail = async (
     queries,
   });
 };
+
+// カテゴリデータを取得する関数
+export const getCategories = async (queries?: MicroCMSQueries) => {
+  return await client.get<Category[]>({ endpoint: "categories", queries });
+};
+

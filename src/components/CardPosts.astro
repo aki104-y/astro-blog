@@ -1,0 +1,57 @@
+---
+import CategoryTag from '../components/CategoryTag.astro';
+
+//microCMS呼び出し
+import { getBlogs } from "../library/microcms";
+const response = await getBlogs({ fields: "id,title,createdAt,updatedAt,category" });
+
+
+// 日付データをフォーマットする関数
+function formatDate(isoDate) {
+  const date = new Date(isoDate);
+  return date.toLocaleDateString('ja-JP');
+}
+---
+
+<style>
+  .card-posts__item {
+    list-style: none;
+    border-bottom: 1px solid #fbe481;
+  }
+</style>
+
+{
+  response.contents.map((content: any) => {
+    if (Array.isArray(content.category)) { // content.categoryが配列であることを確認
+      return (
+        <ul class="card-posts">
+          <li class="card-posts__item">
+            <div class="card-posts__header">
+              <p>公開日：{formatDate(content.createdAt)}更新日{formatDate(content.updatedAt)}</p>
+            </div>
+            <div class="card-posts__title">
+              <a href={content.id}>{content.title}</a>
+            </div>
+            <ul class="card-posts__tag-list">
+            <CategoryTag categories={content.category} />
+          </li>
+          </ul>
+        </ul>
+      )
+    } else {
+      // content.categoryが配列でない場合の処理をここに書く
+      return (
+        <ul class="card-posts">
+          <li class="card-posts__item">
+            <div class="card-posts__header">
+              <p>公開日：{formatDate(content.createdAt)}更新日{formatDate(content.updatedAt)}</p>
+            </div>
+            <div class="card-posts__title">
+              <a href={content.id}>{content.title}</a>
+            </div>
+          </li>
+        </ul>
+      )
+    }
+  })
+}
