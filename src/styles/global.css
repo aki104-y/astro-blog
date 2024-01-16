@@ -1,6 +1,7 @@
 html {
   box-sizing: border-box;
   font-size: 100%;
+  height: 100%;
 }
 
 *,
@@ -10,6 +11,8 @@ html {
 }
 
 body {
+  height: 100%;
+  margin: 0;
   font-family:
     "Helvetica Neue",
     Arial,
@@ -37,7 +40,14 @@ h6 {
 }
 
 a {
+  color: #6786b1;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  opacity: .7;
+  cursor: revert;
 }
 
 img {
@@ -47,12 +57,15 @@ img {
   image-rendering: optimize-contrast; //Chromeで縮小画像がぼやけるのを防ぐ
 }
 
+ul {
+  padding: 0;
+}
 
 .main__inner {
   padding-left: 5%;
-  padding-right: 5%p;
-  padding-top: 80px;
-  padding-bottom: 80px;
+  padding-right: 5%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 @media (768px <= width) {
     .main__inner {
@@ -60,7 +73,32 @@ img {
     margin: 0 auto;
     padding-left: 20px;;
     padding-right: 20px;;
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    }
+  }
+    
+    .heading-lv2 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+    }
+
+    @media (768px <= width) {
+      .heading-lv2 {
+        font-size: 2rem;
+      }
+
+
+    .tag-list {
+      list-style: none;
+    }
+  
+    .tag {
+      color: #292b2c;
+      background-color:#cfd8dc;
+      display: inline-block;
+      padding: .2em .3em;
+    border-radius: 5px;
     }
   }

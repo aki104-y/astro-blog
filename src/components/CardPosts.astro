@@ -14,8 +14,19 @@ function formatDate(isoDate) {
 <style>
   .card-posts__item {
     list-style: none;
-    border-bottom: 1px solid #fbe481;
+    border-bottom: 1px solid #89B3EC;
+    padding-bottom: 20px;
   }
+
+.card-posts__title {
+  font-size: 1rem;
+  margin-bottom: 15px; 
+}
+@media (768px <= width) {
+  .card-posts__title {
+        font-size: 1.2rem;
+      }
+    }
 </style>
 
 {
@@ -23,14 +34,14 @@ function formatDate(isoDate) {
     <ul class="card-posts">
       <li class="card-posts__item">
         <div class="card-posts__header">
-          <p>公開日：{formatDate(content.createdAt)}更新日{formatDate(content.updatedAt)}</p>
+          <p>公開日：{formatDate(content.createdAt)} 更新日：{formatDate(content.updatedAt)}</p>
         </div>
         <div class="card-posts__title">
           <a href={content.id}>{content.title}</a>
         </div>
-        <ul class="card-posts__tag-list">
+        <ul class="card-posts__tag-list tag-list">
           {content.category && content.category.map((category: any) => (
-            <li class="card-posts__tag">{category.name}</li>
+            <li class="card-posts__tag tag">{category.name}</li>
           ))}
         </ul>
       </li>
