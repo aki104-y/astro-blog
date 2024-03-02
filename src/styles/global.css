@@ -61,6 +61,10 @@ ul {
   padding: 0;
 }
 
+li {
+  list-style-position: inside;
+}
+
 .main__inner {
   padding-left: 5%;
   padding-right: 5%;
